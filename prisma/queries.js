@@ -10,6 +10,18 @@ const createUser = async (username, password) => {
     })
 }
 
+const getUserByUsername = async (username, options = { includePassword: false }) => {
+    return await prisma.user.findUnique({
+        where: { username },
+        select: options.includePassword ? {
+                id: true, username: true, password: true
+            } : {
+                id: true, username: true
+            }
+    })
+}
+
 module.exports = {
-    createUser
+    createUser,
+    getUserByUsername
 }
