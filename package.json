@@ -3,11 +3,11 @@
     "dev": "node --watch app.js"
   },
   "dependencies": {
-    "@prisma/client": "^6.9.0",
+    "@prisma/client": "^6.10.0",
     "dotenv": "^16.5.0",
     "express": "^5.1.0"
   },
   "devDependencies": {
-    "prisma": "^6.9.0"
+    "prisma": "^6.10.0"
   }
 }
