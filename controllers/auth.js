@@ -1,5 +1,6 @@
-const { createUser } = require('../prisma/queries')
+const { createUser, getUserByUsername } = require('../prisma/queries')
 const bcryptjs = require('bcryptjs')
+const jwt = require('jsonwebtoken')
 
 const signupController = async (req, res) => {
     let username = req.body.username
@@ -12,6 +13,25 @@ const signupController = async (req, res) => {
     })
 }
 
+const loginController = async (req, res) => {
+    let username = req.body.username
+    let password = req.body.password
+    
+    let user = await getUserByUsername(username, { includePassword:true })
+    const isMatch = await bcryptjs.compare(password, user.password)
+
+    if (isMatch) {
+        const token = jwt.sign({
+            id: user.id, username: user.username
+        }, process.env.JWT_SECRET, { expiresIn: '2min' })
+
+        res.json({ token, user: { id: user.id, username: user.username } })
+    } else {
+        res.status(401).json({ message: 'Invalid credentials' })
+    }
+}
+
 module.exports = {
-    signupController
+    signupController,
+    loginController
 }
