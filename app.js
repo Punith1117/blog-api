@@ -1,9 +1,14 @@
 const express = require('express');
-const { authRouter } = require('./routes/auth');
+const app = express()
+
 require('dotenv').config();
 
-const app = express()
+const passport = require('./config/passport')
+app.use(passport.initialize())
 app.use(express.json())
+
+const { authRouter } = require('./routes/auth');
+
 app.use('/auth', authRouter)
 
 app.get('/health', (req, res) => {
