@@ -1,4 +1,4 @@
-const { createNewPost } = require("../prisma/queries")
+const { createNewPost, getUserPosts } = require("../prisma/queries")
 
 const newPostController = async (req, res) => {
     const postDetails = req.body
@@ -13,7 +13,19 @@ const newPostController = async (req, res) => {
         message: "post successfully uploaded"
     })
 }
+const getAllPostsController = async (req, res) => {
+    if (req.query.isPublished == 'true')
+        isPublished = true
+    else
+        isPublished = false
+
+    const posts = await getUserPosts(req.user.id, isPublished)
+    res.json({
+        posts: posts
+    })
+}
 
 module.exports = {
-    newPostController
+    newPostController,
+    getAllPostsController
 }
