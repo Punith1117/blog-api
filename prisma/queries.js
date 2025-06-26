@@ -21,7 +21,18 @@ const getUserByUsername = async (username, options = { includePassword: false })
     })
 }
 
+const createNewPost = async(userId, title, content, isPublished) => {
+    await prisma.post.create({
+        data: {
+            userId,
+            title,
+            content,
+            isPublished
+        }
+    })
+}
 module.exports = {
     createUser,
-    getUserByUsername
+    getUserByUsername,
+    createNewPost
 }
