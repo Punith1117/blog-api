@@ -31,8 +31,19 @@ const createNewPost = async(userId, title, content, isPublished) => {
         }
     })
 }
+
+const getUserPosts = async (userId, isPublished) => {
+    return await prisma.post.findMany({
+        where: {
+            userId,
+            isPublished
+        }
+    })
+}
+
 module.exports = {
     createUser,
     getUserByUsername,
-    createNewPost
+    createNewPost,
+    getUserPosts
 }
