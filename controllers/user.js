@@ -3,7 +3,7 @@ const { createNewPost, getUserPosts } = require("../prisma/queries")
 const newPostController = async (req, res) => {
     const postDetails = req.body
     
-    if (postDetails.isPublished === 'True')
+    if (postDetails.isPublished === 'true')
         isPublished = true
     else
         isPublished = false
