@@ -84,6 +84,16 @@ const getPosts = async (id) => {
     return posts
 }
 
+const createComment = async (content, userId, postId) => {
+    await prisma.comment.create({
+        data: {
+            content,
+            userId,
+            postId
+        }
+    })
+}
+
 module.exports = {
     createUser,
     getUserByUsername,
@@ -91,5 +101,6 @@ module.exports = {
     getUserPosts,
     modifyPost,
     deletePost,
-    getPosts
+    getPosts,
+    createComment
 }
