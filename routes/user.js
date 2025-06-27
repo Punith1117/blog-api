@@ -5,7 +5,7 @@ const { isAuthenticated }  = require('../middlewares/auth')
 
 userRouter.post('/me/post', isAuthenticated, newPostController)
 userRouter.get('/me/post', isAuthenticated, getAllPostsController)
-userRouter.put('/me/post', isAuthenticated, modifyPostController)
+userRouter.put('/me/post/:id', isAuthenticated, modifyPostController)
 userRouter.delete('/me/post/:id', isAuthenticated, deletePostController)
 
 module.exports = { 

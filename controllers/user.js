@@ -36,7 +36,7 @@ const modifyPostController = async (req, res) => {
         isPublished
     }
     
-    await modifyPost(req.user.id, req.body.id, postDetails)
+    await modifyPost(req.user.id, +req.params.id, postDetails)
     res.json({ message: "Post modified successfully" })
 }
 const deletePostController = async (req, res) => {
