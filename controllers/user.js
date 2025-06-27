@@ -1,4 +1,4 @@
-const { createNewPost, getUserPosts, modifyPost, deletePost, createComment } = require("../prisma/queries")
+const { createNewPost, getUserPosts, modifyPost, deletePost, createComment, getAllUserComments } = require("../prisma/queries")
 
 const newPostController = async (req, res) => {
     const postDetails = req.body
@@ -48,11 +48,16 @@ const newCommentController = async (req, res) => {
     await createComment(req.body.content, req.user.id, req.body.postId)
     res.json({ message: "Comment successfully uploaded" })
 }
+const getAllCommentsController = async (req, res) => {
+    const comments = await getAllUserComments(req.user.id)
+    res.json({ comments })
+}
 
 module.exports = {
     newPostController,
     getAllPostsController,
     modifyPostController,
     deletePostController,
-    newCommentController
+    newCommentController,
+    getAllCommentsController
 }
