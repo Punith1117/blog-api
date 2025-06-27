@@ -93,6 +93,13 @@ const createComment = async (content, userId, postId) => {
         }
     })
 }
+const getAllUserComments = async (userId) => {
+    return prisma.comment.findMany({
+        where: {
+            userId
+        }
+    })
+}
 
 module.exports = {
     createUser,
@@ -102,5 +109,6 @@ module.exports = {
     modifyPost,
     deletePost,
     getPosts,
-    createComment
+    createComment,
+    getAllUserComments
 }
