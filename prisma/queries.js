@@ -41,9 +41,25 @@ const getUserPosts = async (userId, isPublished) => {
     })
 }
 
+const modifyPost = async (userId, postId, postDetails) => {
+    const { title, content, isPublished } = postDetails
+    await prisma.post.update({
+        where: {
+            id: postId,
+            userId
+        },
+        data: {
+            title,
+            content,
+            isPublished
+        }
+    })
+}
+
 module.exports = {
     createUser,
     getUserByUsername,
     createNewPost,
-    getUserPosts
+    getUserPosts,
+    modifyPost
 }
