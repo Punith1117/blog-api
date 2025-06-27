@@ -107,6 +107,14 @@ const getAllPostComments = async (postId) => {
         }
     })
 }
+const deleteComment = async (id, userId) => {
+    await prisma.comment.delete({
+        where: {
+            id,
+            userId
+        }
+    })
+}
 
 module.exports = {
     createUser,
@@ -118,5 +126,6 @@ module.exports = {
     getPosts,
     createComment,
     getAllUserComments,
-    getAllPostComments
+    getAllPostComments,
+    deleteComment
 }
