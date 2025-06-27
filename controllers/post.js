@@ -1,4 +1,4 @@
-const { getPosts } = require("../prisma/queries")
+const { getPosts, getAllPostComments } = require("../prisma/queries")
 
 const getPostsController = async (req, res) => {
     let posts
@@ -11,7 +11,12 @@ const getPostsController = async (req, res) => {
         posts
     })
 }
+const getAllCommentsController = async (req, res) => {
+    const comments = await getAllPostComments(+req.params.id)
+    res.json({ comments })
+}
 
 module.exports = {
-    getPostsController
+    getPostsController,
+    getAllCommentsController
 }
