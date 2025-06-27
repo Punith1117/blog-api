@@ -65,11 +65,31 @@ const deletePost = async (postId, userId) => {
     })
 }
 
+const getPosts = async (id) => {
+    let posts
+    if (id === undefined) {
+        posts = await prisma.post.findMany({
+            where: {
+                isPublished: true
+            }
+        })
+    } else {
+        posts = await prisma.post.findUnique({
+            where: {
+                id,
+                isPublished: true
+            }
+        })
+    }
+    return posts
+}
+
 module.exports = {
     createUser,
     getUserByUsername,
     createNewPost,
     getUserPosts,
     modifyPost,
-    deletePost
+    deletePost,
+    getPosts
 }
