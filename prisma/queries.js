@@ -100,6 +100,13 @@ const getAllUserComments = async (userId) => {
         }
     })
 }
+const getAllPostComments = async (postId) => {
+    return prisma.comment.findMany({
+        where: {
+            postId
+        }
+    })
+}
 
 module.exports = {
     createUser,
@@ -110,5 +117,6 @@ module.exports = {
     deletePost,
     getPosts,
     createComment,
-    getAllUserComments
+    getAllUserComments,
+    getAllPostComments
 }
