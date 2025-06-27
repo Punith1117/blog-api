@@ -8,10 +8,12 @@ app.use(passport.initialize())
 app.use(express.json())
 
 const { authRouter } = require('./routes/auth');
-const { userRouter } = require('./routes/user')
+const { userRouter } = require('./routes/user');
+const { postRouter } = require('./routes/post');
 
 app.use('/auth', authRouter)
 app.use('/user', userRouter)
+app.use('/post', postRouter)
 
 app.get('/health', (req, res) => {
     res.status(200).json({ status: 'ok' });
