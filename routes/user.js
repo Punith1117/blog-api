@@ -5,7 +5,8 @@ const { newPostController,
     modifyPostController,
     deletePostController,
     newCommentController,
-    getAllCommentsController
+    getAllCommentsController,
+    deleteCommentController
 } = require('../controllers/user')
 const { isAuthenticated }  = require('../middlewares/auth')
 
@@ -16,6 +17,7 @@ userRouter.delete('/me/post/:id', isAuthenticated, deletePostController)
 
 userRouter.post('/me/comment', isAuthenticated, newCommentController)
 userRouter.get('/me/comment', isAuthenticated, getAllCommentsController)
+userRouter.delete('/me/comment/:id', isAuthenticated, deleteCommentController)
 
 module.exports = { 
     userRouter
