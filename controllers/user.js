@@ -3,7 +3,7 @@ const { createNewPost, getUserPosts, modifyPost, deletePost, createComment, getA
 const newPostController = async (req, res) => {
     const postDetails = req.body
     
-    if (postDetails.isPublished === 'true')
+    if (postDetails.isPublished === true)
         isPublished = true
     else
         isPublished = false
@@ -25,7 +25,7 @@ const getAllPostsController = async (req, res) => {
     })
 }
 const modifyPostController = async (req, res) => {
-    if (req.body.isPublished == 'true')
+    if (req.body.isPublished === true)
         isPublished = true
     else
         isPublished = false
