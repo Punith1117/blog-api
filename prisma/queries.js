@@ -71,6 +71,16 @@ const getPosts = async (id) => {
         posts = await prisma.post.findMany({
             where: {
                 isPublished: true
+            },
+            select: {
+                id: true,
+                title: true,
+                content: true,
+                user: {
+                    select: {
+                        username: true
+                    }
+                }
             }
         })
     } else {
@@ -78,6 +88,16 @@ const getPosts = async (id) => {
             where: {
                 id,
                 isPublished: true
+            },
+            select: {
+                id: true,
+                title: true,
+                content: true,
+                user: {
+                    select: {
+                        username: true
+                    }
+                }
             }
         })
     }
