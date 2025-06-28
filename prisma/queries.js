@@ -124,6 +124,16 @@ const getAllPostComments = async (postId) => {
     return prisma.comment.findMany({
         where: {
             postId
+        },
+        select: {
+            id: true,
+            content: true,
+            postId: true,
+            user: {
+                select: {
+                    username: true
+                }
+            }
         }
     })
 }
