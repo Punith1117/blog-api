@@ -1,8 +1,14 @@
 const express = require('express');
+const cors = require('cors')
 const app = express()
 
 require('dotenv').config();
 
+app.use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}))
 const passport = require('./config/passport')
 app.use(passport.initialize())
 app.use(express.json())
