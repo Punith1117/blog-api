@@ -2,6 +2,7 @@ const express = require('express')
 const userRouter = express.Router()
 const { newPostController,
     getAllPostsController,
+    getPostController,
     modifyPostController,
     deletePostController,
     newCommentController,
@@ -12,6 +13,7 @@ const { isAuthenticated }  = require('../middlewares/auth')
 
 userRouter.post('/me/post', isAuthenticated, newPostController)
 userRouter.get('/me/post', isAuthenticated, getAllPostsController)
+userRouter.get('/me/post/:id', isAuthenticated, getPostController)
 userRouter.put('/me/post/:id', isAuthenticated, modifyPostController)
 userRouter.delete('/me/post/:id', isAuthenticated, deletePostController)
 

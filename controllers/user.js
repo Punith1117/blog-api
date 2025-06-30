@@ -24,6 +24,13 @@ const getAllPostsController = async (req, res) => {
         posts: posts
     })
 }
+const getPostController = async (req, res) => {
+    const postId = +req.params.id
+    const posts = await getUserPosts(req.user.id, null, postId)
+    res.json({
+        posts: posts
+    })
+}
 const modifyPostController = async (req, res) => {
     if (req.body.isPublished === true)
         isPublished = true
@@ -60,6 +67,7 @@ const deleteCommentController = async (req, res) => {
 module.exports = {
     newPostController,
     getAllPostsController,
+    getPostController,
     modifyPostController,
     deletePostController,
     newCommentController,
