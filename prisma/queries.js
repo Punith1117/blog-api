@@ -32,13 +32,24 @@ const createNewPost = async(userId, title, content, isPublished) => {
     })
 }
 
-const getUserPosts = async (userId, isPublished) => {
-    return await prisma.post.findMany({
-        where: {
-            userId,
-            isPublished
-        }
-    })
+const getUserPosts = async (userId, isPublished, id) => {
+    let posts
+    if (id == undefined) {
+        posts = await prisma.post.findMany({
+            where: {
+                userId,
+                isPublished
+            }
+        })
+    } else {
+        posts = await prisma.post.findFirst({
+            where: {
+                id,
+                userId
+            }
+        })
+    }
+    return posts
 }
 
 const modifyPost = async (userId, postId, postDetails) => {
