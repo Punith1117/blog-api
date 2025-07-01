@@ -1,10 +1,14 @@
 const { createUser, getUserByUsername } = require('../prisma/queries')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+const { clean } = require('../utilities')
 
 const signupController = async (req, res) => {
-    let username = req.body.username
-    let password = req.body.password
+    let username = clean(req.body.username)
+    let password = clean(req.body.password)
+    if (username === '' || password === '') {
+        res.status(401).json({ message: 'Invalid credentials' })
+    }
     let hashedPassword = await bcryptjs.hash(password, 10)
     await createUser(username, hashedPassword)
     res.status(201).json({
