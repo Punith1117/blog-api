@@ -8,6 +8,7 @@ const signupController = async (req, res) => {
     let password = clean(req.body.password)
     if (username === '' || password === '') {
         res.status(401).json({ message: 'Invalid credentials' })
+        return
     }
     let hashedPassword = await bcryptjs.hash(password, 10)
     await createUser(username, hashedPassword)
